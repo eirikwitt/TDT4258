@@ -22,7 +22,7 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 	for (i = 0; i < 8; i++) {
 		if (sounds[i].pos >= sounds[i].end)
 			sounds[i].pos = NULL;
-		else
+		else if (sounds[i].pos)
 			sum += *(sounds[i].pos++);
 	}
 	write_dac(sum);
