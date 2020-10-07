@@ -14,7 +14,7 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 	 * TODO feed new samples to the DAC remember to clear the pending
 	 * interrupt by writing 1 to TIMER1_IFC 
 	 */
-	uint16_t sum[2] = {0, 0};
+	uint16_t sum;
 	unsigned i;
 
 	*GPIO_PA_DOUT = (*GPIO_PA_DOUT + 0x1) & 0xFFFF;
@@ -24,11 +24,10 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 		if (sounds[i].pos >= sounds[i].end) {
 			sounds[i].pos = NULL;
 		} else {
-			sum[0] += *(sounds[i].pos++);
-			sum[1] += *(sounds[i].pos++);
+			sum += *(sounds[i].pos++);
 		}
 	}
-	write_dac((uint32_t)sum[1] << 12 | sum[0] >> 4);
+	write_dac((uint32_t)sum << 12 | sum >> 4);
 }
 
 /*
