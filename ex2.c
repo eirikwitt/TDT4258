@@ -13,7 +13,7 @@
 /*
  * The period between sound samples, in clock cycles 
  */
-#define   SAMPLE_PERIOD   292
+#define   SAMPLE_PERIOD   1750
 
 SOUND_DECLARE(ahem_x)
 volatile Sound sounds[8] = {SOUND(ahem_x)};
