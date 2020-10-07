@@ -2,6 +2,7 @@
 #include <stdbool.h>
 
 #include "efm32gg.h"
+#include "ex2.h"
 
 /*
  * TODO calculate the appropriate sample period for the sound wave(s) you 
@@ -14,15 +15,8 @@
  */
 #define   SAMPLE_PERIOD   292
 
-//uint32_t 
-
-/*
- * Declaration of peripheral setup functions 
- */
-void setup_timer(uint32_t period);
-void setup_dac(void);
-void setup_gpio(void);
-void setup_nvic(void);
+SOUND_DECLARE(ahem_x)
+volatile Sound sounds[8] = {SOUND(ahem_x)};
 
 /*
  * Your code will start executing here 
@@ -46,7 +40,12 @@ int main(void)
 	 * interrupts instead of infinite loop for busy-waiting 
 	 */
 	while (1) {
-		
+		uint8_t btn = read_buttons();
+		unsigned i;
+
+		for (i = 0; i < 8; ++i)
+			if (!(btn & 1<<i) && !sounds[i].pos)
+				sounds[i].pos = sounds[i].start;
 	}
 
 	return 0;
