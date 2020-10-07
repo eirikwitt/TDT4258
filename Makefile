@@ -37,5 +37,5 @@ clean :
 	-rm -rf *.o *.elf *.bin *.hex 
 
 %.o : %.wav
-	ffmpeg -y -i $< -f u16le -acodec pcm_u16le $*.raw
+	ffmpeg -y -i $< -f u16le -acodec pcm_u16le -ar 48000 -ac 2 $*.raw
 	$(LD) -r -b binary -o $@ $*.raw

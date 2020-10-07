@@ -25,5 +25,5 @@ void setup_dac(void)
 
 void write_dac(uint32_t data)
 {
-	*DAC0_COMBDATA = data;
+	*DAC0_COMBDATA = data & 0x0FFF0FFF;
 }
