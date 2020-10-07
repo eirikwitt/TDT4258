@@ -18,7 +18,7 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 	unsigned i;
 
 	*GPIO_PA_DOUT = (*GPIO_PA_DOUT + 0x100) & 0xFF00;
-	*TIMER1_IFC = 0xFFFFFFFFUL
+	*TIMER1_IFC = 0xFFFFFFFFUL;
 	for (i = 0; i < 8; i++) {
 		if (sounds[i].pos >= sounds[i].end)
 			sounds[i].pos = NULL;
