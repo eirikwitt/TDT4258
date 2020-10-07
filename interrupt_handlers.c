@@ -20,9 +20,10 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 	*GPIO_PA_DOUT = (*GPIO_PA_DOUT + 0x1) & 0xFFFF;
 	*TIMER1_IFC = 0xFFFFFFFFUL;
 	for (i = 0; i < 8; i++) {
+		if (!sounds[i].pos) continue;
 		if (sounds[i].pos >= sounds[i].end)
 			sounds[i].pos = NULL;
-		else if (sounds[i].pos)
+		else
 			sum += *(sounds[i].pos++);
 	}
 	write_dac(sum);
