@@ -27,7 +27,7 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 			sum += *(sounds[i].pos++);
 		}
 	}
-	write_dac((uint32_t)sum << 16 | sum);
+	write_dac((uint32_t)sum << 18 | sum << 2);
 }
 
 /*
