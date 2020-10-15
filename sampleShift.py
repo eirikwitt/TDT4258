@@ -2,8 +2,8 @@
 
 import sys
 
-with open(sys.stdin, "rb") as stdin:
-    with open(sys.stdout, "wb") as stdout:
+with open(sys.argv[1], "rb") as stdin:
+    with open(sys.argv[2], "wb") as stdout:
         sample = stdin.read(2)
         converted = []
         while sample:
