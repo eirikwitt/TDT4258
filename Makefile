@@ -37,5 +37,5 @@ clean :
 	-rm -rf *.o *.elf *.bin *.hex
 
 %.o : %.wav
-	ffmpeg -y -i $< -f u8 -acodec pcm_u8 -ar 11025 -ac 1 $*.raw
+	ffmpeg -y -i $< -f s8 -acodec pcm_s8 -ar 11025 -ac 1 $*.raw
 	$(LD) -r -b binary -o $@ $*.raw
