@@ -13,7 +13,7 @@
 /*
  * The period between sound samples, in clock cycles 
  */
-#define   SAMPLE_PERIOD   292
+#define   SAMPLE_PERIOD   1270
 
 SOUND_DECLARE(ahem_x)
 volatile Sound sounds[8] = {SOUND(ahem_x)};
@@ -44,7 +44,8 @@ int main(void)
 		unsigned i;
 
 		for (i = 0; i < 8; ++i)
-			if (!(btn & 1<<i) && !sounds[i].pos)
+			//if (!(btn & 1<<i))
+			if (!sounds[i].pos)
 				sounds[i].pos = sounds[i].start;
 	}
 
