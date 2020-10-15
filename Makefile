@@ -34,8 +34,8 @@ upload :
 
 .PHONY : clean
 clean :
-	-rm -rf *.o *.elf *.bin *.hex 
+	-rm -rf *.o *.elf *.bin *.hex
 
 %.o : %.wav
-	ffmpeg -y -i $< -f u16le -acodec pcm_u16le -ar 8000 -ac 1 $*.raw
+	ffmpeg -y -i $< -f u8 -acodec pcm_u8 -ar 11025 -ac 1 $*.raw
 	$(LD) -r -b binary -o $@ $*.raw
