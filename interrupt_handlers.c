@@ -14,7 +14,7 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 	 * TODO feed new samples to the DAC remember to clear the pending
 	 * interrupt by writing 1 to TIMER1_IFC 
 	 */
-	uint16_t sum;
+	uint16_t sum = 0;
 	unsigned i;
 
 	*GPIO_PA_DOUT = (*GPIO_PA_DOUT + 0x1) & 0xFFFF;
