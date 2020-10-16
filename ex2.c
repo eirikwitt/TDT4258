@@ -45,7 +45,7 @@ int main(void)
 		unsigned i;
 
 		for (i = 0; i < 8; ++i)
-			if (!(btn & 1<<i) && !sounds[i].pos)
+			if (!(btn & 1<<i))
 				sounds[i].pos = sounds[i].start;
 	}
 
