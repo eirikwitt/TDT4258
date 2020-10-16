@@ -17,7 +17,13 @@
 
 SOUND_DECLARE(ahem_x)
 SOUND_DECLARE(nokia)
-volatile Sound sounds[8] = {SOUND(ahem_x), SOUND(nokia)};
+SOUND_DECLARE(call_to_arms)
+SOUND_DECLARE(bloop_x)
+SOUND_DECLARE(bad_disk_x)
+SOUND_DECLARE(applause3)
+volatile Sound sounds[8] = {SOUND(ahem_x), SOUND(nokia), SOUND(call_to_arms),
+	SOUND(bloop_x), SOUND(bad_disk_x), SOUND(applause3)
+};
 
 /*
  * Your code will start executing here 
