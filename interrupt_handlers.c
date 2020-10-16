@@ -36,7 +36,7 @@ void handle_gpio()
 	uint8_t btn = read_buttons();
 	unsigned i;
 
-	*GPIO_PC_IFC = ~btn;
+	*GPIO_IFC = ~btn;
 	for (i = 0; i < 8; ++i)
 		if (!(btn & 1<<i))
 			sounds[i].pos = sounds[i].start;
