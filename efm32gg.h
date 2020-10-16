@@ -111,6 +111,7 @@
 #define DAC0_CH0DATA  ((volatile uint32_t*)(DAC0_BASE2 + 0x020))
 #define DAC0_CH1DATA  ((volatile uint32_t*)(DAC0_BASE2 + 0x024))
 #define DAC0_COMBDATA ((volatile uint32_t*)(DAC0_BASE2 + 0x028))
+#define DAC0_CAL      ((volatile uint32_t*)(DAC0_BASE2 + 0x02C))
 
 // DMA
 
