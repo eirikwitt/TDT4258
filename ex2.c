@@ -16,7 +16,8 @@
 #define   SAMPLE_PERIOD   1270
 
 SOUND_DECLARE(ahem_x)
-volatile Sound sounds[8] = {SOUND(ahem_x)};
+SOUND_DECLARE(nokia)
+volatile Sound sounds[8] = {SOUND(ahem_x), SOUND(nokia)};
 
 /*
  * Your code will start executing here 
@@ -45,7 +46,7 @@ int main(void)
 
 		for (i = 0; i < 8; ++i)
 			//if (!(btn & 1<<i))
-			if (!sounds[i].pos)
+			if (!sounds[i].pos && i == 1)
 				sounds[i].pos = sounds[i].start;
 	}
 
