@@ -15,7 +15,7 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 	 * interrupt by writing 1 to TIMER1_IFC 
 	 */
 	int16_t sum = 0;
-	uint32_t usum;
+	uint16_t usum;
 	unsigned i;
 
 	*TIMER1_IFC = 0xFFFFFFFFul;
@@ -24,11 +24,11 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 		if (sounds[i].pos >= sounds[i].end) {
 			sounds[i].pos = NULL;
 		} else {
-			sum += *(sounds[i].pos++);
+			sum += *(sounds[i].pos++) << 2;
 		}
 	}
-	usum = ((uint32_t)sum + 0x7FF) & 0xFFF;
-	write_dac(usum << 18 | usum << 2);
+	usum = (uint32_t)sum + 0x7FF;
+	write_dac(usum << 16 | usum);
 }
 
 /*
