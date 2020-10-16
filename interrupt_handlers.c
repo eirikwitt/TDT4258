@@ -16,11 +16,9 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 	 */
 	uint16_t sum = 0;
 	unsigned i;
-	static uint32_t counter = 0;
 
-	*GPIO_PA_DOUT = (*GPIO_PA_DOUT + 0x1) & 0xFFFF;
-	*TIMER1_IFC = 0xFFFFFFFFUL;
-	for (i = 1; i < 2; i++) {
+	*TIMER1_IFC = 0xFFFFFFFFul;
+	for (i = 0; i < 8; i++) {
 		if (!sounds[i].pos) continue;
 		if (sounds[i].pos >= sounds[i].end) {
 			sounds[i].pos = NULL;
@@ -28,7 +26,6 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 			sum += *(sounds[i].pos++);
 		}
 	}
-//	sum = counter++ & 32 ? 0x00 : 0xFF;
 	write_dac((uint32_t)sum << 20 | sum << 4);
 }
 
