@@ -31,15 +31,24 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 	write_dac(usum << 16 | usum);
 }
 
+void handle_gpio()
+{
+	uint8_t btn = read_buttons();
+	unsigned i;
+
+	*GPIO_PC_IFC = ~btn;
+	for (i = 0; i < 8; ++i)
+		if (!(btn & 1<<i))
+			sounds[i].pos = sounds[i].start;
+
+}
+
 /*
  * GPIO even pin interrupt handler 
  */
 void __attribute__ ((interrupt)) GPIO_EVEN_IRQHandler()
 {
-	/*
-	 * TODO handle button pressed event, remember to clear pending
-	 * interrupt 
-	 */
+	handle_gpio();
 }
 
 /*
@@ -47,8 +56,5 @@ void __attribute__ ((interrupt)) GPIO_EVEN_IRQHandler()
  */
 void __attribute__ ((interrupt)) GPIO_ODD_IRQHandler()
 {
-	/*
-	 * TODO handle button pressed event, remember to clear pending
-	 * interrupt 
-	 */
+	handle_gpio();
 }

@@ -50,12 +50,6 @@ int main(void)
 	 * interrupts instead of infinite loop for busy-waiting 
 	 */
 	while (1) {
-		uint8_t btn = read_buttons();
-		unsigned i;
-
-		for (i = 0; i < 8; ++i)
-			if (!(btn & 1<<i))
-				sounds[i].pos = sounds[i].start;
 	}
 
 	return 0;
@@ -71,7 +65,7 @@ void setup_nvic(void)
 	 * need TIMER1, GPIO odd and GPIO even interrupt handling for this
 	 * assignment. 
 	 */
-	*ISER0 = 1<<12 /*| 1<<11 | 1<<1*/;
+	*ISER0 = 1<<12 | 1<<11 | 1<<1;
 }
 
 /*
