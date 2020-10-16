@@ -14,7 +14,8 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 	 * TODO feed new samples to the DAC remember to clear the pending
 	 * interrupt by writing 1 to TIMER1_IFC 
 	 */
-	uint16_t sum = 0;
+	int16_t sum = 0;
+	uint32_t usum;
 	unsigned i;
 
 	*TIMER1_IFC = 0xFFFFFFFFul;
@@ -26,7 +27,8 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 			sum += *(sounds[i].pos++);
 		}
 	}
-	write_dac((uint32_t)sum << 18 | sum << 2);
+	usum = ((uint32_t)sum + 0x7FF) & 0xFFF;
+	write_dac(usum << 18 | usum << 2);
 }
 
 /*
