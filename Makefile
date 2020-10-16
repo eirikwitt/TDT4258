@@ -39,4 +39,4 @@ clean :
 %.o : %.wav
 	ffmpeg -y -i $< -f s8 -acodec pcm_s8 -ar 11025 -ac 1 $*.raw
 #	$(LD) -r -b binary -o $@ $*.raw
-	$(OBJCOPY) -I binary -O elf32-littlearm --rename-section .data=.rodata $*.raw $@
+	$(OBJCOPY) -I binary -O elf32-littlearm -B arm --rename-section .data=.rodata $*.raw $@
