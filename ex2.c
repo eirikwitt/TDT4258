@@ -45,7 +45,7 @@ int main(void)
 	 */
 	setup_nvic();
 
-	*SCR = 6;
+	*SCR = 2;
 	while (1) __asm volatile ("wfi");
 
 	return 0;
