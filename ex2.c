@@ -46,7 +46,7 @@ int main(void)
 	setup_nvic();
 
 	*SCR = 6;
-	while (1) __wfi();
+	while (1) __WFI();
 
 	return 0;
 }
