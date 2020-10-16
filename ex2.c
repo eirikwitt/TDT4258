@@ -46,7 +46,10 @@ int main(void)
 	setup_nvic();
 
 	*SCR = 2;
-	while (1) __asm volatile ("wfi":::"memory");
+	while (1) {
+		__asm volatile ("wfi");
+		*GPIO_PA_DOUT = 0x3400;
+	}
 
 	return 0;
 }
