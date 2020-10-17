@@ -13,17 +13,15 @@ void __attribute__((interrupt)) TIMER1_IRQHandler() {
 
 	*TIMER1_IFC = *TIMER1_IF; /* clears pending interrupt*/
 	for (i = 0; i < 8; i++) {
-		/* If pos == NULL, then the sound is not included in the sum */
-		if (!sounds[i].pos) continue;
-		/* Sets pos = NULL if the sound is finished */
+		if (!sounds[i].pos) continue; /* sound is not playing */
 		if (sounds[i].pos >= sounds[i].end) {
-			sounds[i].pos = NULL;
-			/* Disables deep sleep */
-			*SCR |= 100;
+			sounds[i].pos = NULL; /* end of sound */
+			*SCR |= 4; /* enable deep sleep */
 		} else {
 			/* Adds value of sound to sum */
 			/* Sound is shifted to increase volume, as it is an 8 bit value in a 12 bit dac */
 			sum += *(sounds[i].pos++) << 2;
+			*SCR &= ~4; /* disable deep sleep */
 		}
 	}
 	usum = (uint32_t)sum + 0x7FF; /* Converts sum to unsigned by adding 0x7FF */
@@ -37,12 +35,12 @@ void handle_gpio()
 	unsigned i;
 
 	*GPIO_IFC = btn; /* Clears active GPIO interrupt flags */
-	for (i = 0; i < 8; ++i)
-		if (btn & 1 << i)
-			/* Disables deep sleep */
-			*SCR &= 011;
-			/* Starts sounds by setting pos to start*/
-			sounds[i].pos = sounds[i].start;
+	for (i = 0; i < 8; ++i) {
+		if (btn & 1 << i) {
+			*SCR &= ~4; /* disable deep sleep */
+			sounds[i].pos = sounds[i].start; /* start playing sound */
+		}
+	}
 }
 
 /* GPIO even pin interrupt handler */
