@@ -41,7 +41,6 @@
 #define GPIO_EXTIRISE  ((volatile uint32_t*)(GPIO_PA_BASE + 0x108))
 #define GPIO_EXTIFALL  ((volatile uint32_t*)(GPIO_PA_BASE + 0x10c))
 #define GPIO_IEN       ((volatile uint32_t*)(GPIO_PA_BASE + 0x110))
-#define GPIO_IF        ((volatile uint32_t*)(GPIO_PA_BASE + 0x114))
 #define GPIO_IFC       ((volatile uint32_t*)(GPIO_PA_BASE + 0x11c))
 
 // CMU
@@ -112,7 +111,6 @@
 #define DAC0_CH0DATA  ((volatile uint32_t*)(DAC0_BASE2 + 0x020))
 #define DAC0_CH1DATA  ((volatile uint32_t*)(DAC0_BASE2 + 0x024))
 #define DAC0_COMBDATA ((volatile uint32_t*)(DAC0_BASE2 + 0x028))
-#define DAC0_CAL      ((volatile uint32_t*)(DAC0_BASE2 + 0x02C))
 
 // DMA
 
@@ -142,3 +140,6 @@
 #define SCR          ((volatile uint32_t*)0xe000ed10)
 #define SYSTICK_CTRL ((volatile uint32_t*)0xe000e010)
 #define SYSTICK_LOAD ((volatile uint32_t*)0xe000e014)
+
+// added:
+#define GPIO_IF        ((volatile uint32_t*)(GPIO_PA_BASE + 0x114))
