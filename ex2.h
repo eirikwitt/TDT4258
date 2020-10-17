@@ -1,9 +1,11 @@
 #include <stdint.h>
 
 /* objcopy creates _binary_x_raw_start and _binary_x_raw_end symbols for the
- * start and end of the embedded binary data. SOUND_DECLARE and SOUND use
- * preprocessor concatenation to import these symbols and create abstract
- * Sound structs from them.
+ * start and end of the embedded binary data.
+ * SOUND_DECLARE and SOUND use preprocessor concatenation to import these
+ * symbols and create abstract Sound structs from them.
+ * the volatile keyword is used according to how the struct is used in interrupt
+ * handlers.
  */
 #define SOUND_DECLARE(name) \
 extern int8_t _binary_##name##_raw_start[]; \
