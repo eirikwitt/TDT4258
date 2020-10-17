@@ -22,10 +22,11 @@ for (i = 0; i < 8; i++)
 	/* If pos == NULL, then the sound is not included in the sum */
 	if (!sounds[i].pos)
 		continue;
-	/* Sets pos = NULL if the sound is finished */
+	/* Sets pos = NULL and enables deep sleep if the sound is finished */
 	if (sounds[i].pos >= sounds[i].end)
 	{
 		sounds[i].pos = NULL;
+		*SCR |= 100;
 	}
 	else
 	{
@@ -49,6 +50,8 @@ void handle_gpio()
 	*GPIO_IFC = btn; /*Clears active GPIO interrupt flags */
 	for (i = 0; i < 8; ++i)
 		if (btn & 1 << i)
+			/* Disables deep sleep */
+			*SCR &= 011;
 			/* Starts sounds by setting pos to start*/
 			sounds[i].pos = sounds[i].start;
 }
