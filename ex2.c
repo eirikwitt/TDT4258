@@ -47,7 +47,7 @@ int main(void)
 
 	//uint32_t c = 0;
 	//while (++c) __asm volatile ("wfi");
-	*SCR = 2|4;
+	*SCR = 2;
 	while (1) {
 		__asm volatile ("wfi");
 		*GPIO_PA_DOUT = 0x3400;
