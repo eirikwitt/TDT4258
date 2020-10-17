@@ -11,7 +11,7 @@ void __attribute__((interrupt)) TIMER1_IRQHandler() {
 	uint16_t usum;
 	unsigned i;
 
-	*TIMER1_IFC = 1; /* clears pending interrupt*/
+	*TIMER1_IFC = *TIMER1_IF; /* clears pending interrupt*/
 	for (i = 0; i < 8; i++) {
 		/* If pos == NULL, then the sound is not included in the sum */
 		if (!sounds[i].pos) continue;
