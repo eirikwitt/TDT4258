@@ -17,11 +17,11 @@ void setup_dac(void)
 	 * timer interrupt 
 	 */
 
-	/*CMU_HFPERCLKEN0 |= CMU2_HFPERCLKEN0_DAC0;
+	*CMU_HFPERCLKEN0 |= CMU2_HFPERCLKEN0_DAC0;
 	*DAC0_CAL = *(volatile uint32_t *)0x0FE081C8;
 	*DAC0_CTRL = 0x50010;
 	*DAC0_CH0CTRL = 1;
-	*DAC0_CH1CTRL = 1;*/
+	*DAC0_CH1CTRL = 1;
 }
 
 void write_dac(uint32_t data)
