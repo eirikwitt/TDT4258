@@ -18,12 +18,12 @@ void __attribute__((interrupt)) TIMER1_IRQHandler() {
 		/* Sets pos = NULL if the sound is finished */
 		if (sounds[i].pos >= sounds[i].end) {
 			sounds[i].pos = NULL;
+			/* Disables deep sleep */
+			*SCR |= 100;
 		} else {
 			/* Adds value of sound to sum */
 			/* Sound is shifted to increase volume, as it is an 8 bit value in a 12 bit dac */
 			sum += *(sounds[i].pos++) << 2;
-			/* Disables deep sleep */
-			*SCR |= 100;
 		}
 	}
 	usum = (uint32_t)sum + 0x7FF; /* Converts sum to unsigned by adding 0x7FF */
