@@ -36,7 +36,10 @@ upload :
 clean :
 	-rm -rf *.o *.elf *.bin *.hex
 
-%.o : %.wav
+# extract raw pcm audio data from wav container
+%.raw : %.wav
 	ffmpeg -y -i $< -f s8 -acodec pcm_s8 -ar 11025 -ac 1 $*.raw
-#	$(LD) -r -b binary -o $@ $*.raw
+
+# create linkable object files from raw pcm audio data
+%.o : %.raw
 	$(OBJCOPY) -I binary -O elf32-littlearm -B arm --rename-section .data=.rodata $*.raw $@

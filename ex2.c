@@ -4,17 +4,10 @@
 #include "efm32gg.h"
 #include "ex2.h"
 
-/*
- * TODO calculate the appropriate sample period for the sound wave(s) you 
- * want to generate. The core clock (which the timer clock is derived
- * from) runs at 14 MHz by default. Also remember that the timer counter
- * registers are 16 bits. 
- */
-/*
- * The period between sound samples, in clock cycles 
- */
+/* The period between sound samples, in clock cycles */
 #define   SAMPLE_PERIOD   1270
 
+/* import start and end symbols from sound object files */
 SOUND_DECLARE(ahem_x)
 SOUND_DECLARE(nokia)
 SOUND_DECLARE(call_to_arms)
@@ -23,54 +16,44 @@ SOUND_DECLARE(bad_disk_x)
 SOUND_DECLARE(applause3)
 SOUND_DECLARE(air_raid)
 SOUND_DECLARE(bushj_liberty)
+
+/* construct Sound structs from start and end symbols
+ * sounds[i] corresponds to button i
+ */
+
 volatile Sound sounds[8] = {SOUND(ahem_x), SOUND(nokia), SOUND(call_to_arms),
 	SOUND(bloop_x), SOUND(bad_disk_x), SOUND(applause3), SOUND(air_raid),
 	SOUND(bushj_liberty)
 };
 
-/*
- * Your code will start executing here 
- */
+/* Your code will start executing here */
 int main(void)
 {
-	/*
-	 * Call the peripheral setup functions 
-	 */
+	/* Call the peripheral setup functions */
 	setup_gpio();
 	setup_dac();
 	setup_timer(SAMPLE_PERIOD);
 
-	/*
-	 * Enable interrupt handling 
-	 */
+	/* Enable interrupt handling */
 	setup_nvic();
 
-	/*
-	 * TODO for higher energy efficiency, sleep while waiting for
-	 * interrupts instead of infinite loop for busy-waiting 
-	 */
+	/* While loop that constantly polls the buttons */
 	while (1) {
 		uint8_t btn = read_buttons();
 		unsigned i;
 
 		for (i = 0; i < 8; ++i)
-			if (!(btn & 1<<i))
+			if (!(btn & 1<<i)) /*If button i is pressed*/
+				/*Sets the pos of sound i to the start adress of the sound in memory*/
 				sounds[i].pos = sounds[i].start;
 	}
 
 	return 0;
 }
 
+/* enable interrupts in NVIC */
 void setup_nvic(void)
 {
-	/*
-	 * TODO use the NVIC ISERx registers to enable handling of
-	 * interrupt(s) remember two things are necessary for interrupt
-	 * handling: - the peripheral must generate an interrupt signal - the
-	 * NVIC must be configured to make the CPU handle the signal You will
-	 * need TIMER1, GPIO odd and GPIO even interrupt handling for this
-	 * assignment. 
-	 */
 	*ISER0 = 1<<12 /*| 1<<11 | 1<<1*/;
 }
 

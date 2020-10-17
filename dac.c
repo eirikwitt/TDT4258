@@ -6,25 +6,14 @@
 
 void setup_dac(void)
 {
-	/*
-	 * TODO enable and set up the Digital-Analog Converter
-	 * 
-	 * 1. Enable the DAC clock by setting bit 17 in CMU_HFPERCLKEN0 2.
-	 * Prescale DAC clock by writing 0x50010 to DAC0_CTRL 3. Enable left
-	 * and right audio channels by writing 1 to DAC0_CH0CTRL and
-	 * DAC0_CH1CTRL 4. Write a continuous stream of samples to the DAC
-	 * data registers, DAC0_CH0DATA and DAC0_CH1DATA, for example from a
-	 * timer interrupt 
-	 */
-
-	*CMU_HFPERCLKEN0 |= CMU2_HFPERCLKEN0_DAC0;
-	*DAC0_CAL = *(volatile uint32_t *)0x0FE081C8;
-	*DAC0_CTRL = 0x50010;
-	*DAC0_CH0CTRL = 1;
-	*DAC0_CH1CTRL = 1;
+	*CMU_HFPERCLKEN0 |= CMU2_HFPERCLKEN0_DAC0; // Enable the DAC clock by s$
+	*DAC0_CTRL = 0x50010; //Prescale DAC clock by writing 0x50010 to DAC0_C$
+	*DAC0_CH0CTRL = 1; //Enable left audio channel
+	*DAC0_CH1CTRL = 1; //Enable right audio channel
 }
 
 void write_dac(uint32_t data)
 {
-	*DAC0_COMBDATA = data & 0x0FFF0FFF;
+	*DAC0_COMBDATA = data & 0x0FFF0FFF; //Write data of samples to the DAC $
 }
+
