@@ -12,11 +12,11 @@ void __attribute__((interrupt)) TIMER1_IRQHandler() {
 	unsigned i;
 
 	*TIMER1_IFC = *TIMER1_IF; /* clears pending interrupt*/
+	*SCR |= 4; /* enable deep sleep, is disabled again if a sound is still playing */
 	for (i = 0; i < 8; i++) {
 		if (!sounds[i].pos) continue; /* sound is not playing */
 		if (sounds[i].pos >= sounds[i].end) {
 			sounds[i].pos = NULL; /* end of sound */
-			*SCR |= 4; /* enable deep sleep */
 		} else {
 			/* Adds value of sound to sum */
 			/* Sound is shifted to increase volume, as it is an 8 bit value in a 12 bit dac */
