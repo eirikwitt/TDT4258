@@ -45,7 +45,9 @@ int main(void)
 	 */
 	setup_nvic();
 
-	*SCR = 2;
+	//uint32_t c = 0;
+	//while (++c) __asm volatile ("wfi");
+	*SCR = 2|4;
 	while (1) {
 		__asm volatile ("wfi");
 		*GPIO_PA_DOUT = 0x3400;
@@ -56,7 +58,7 @@ int main(void)
 
 void setup_nvic(void)
 {
-	*ISER0 = 1<<12 | 1<<11 | 1<<1;
+	//*ISER0 = 1<<12 | 1<<11 | 1<<1;
 }
 
 /*
