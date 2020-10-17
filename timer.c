@@ -22,8 +22,8 @@ void setup_timer(uint16_t period)
 	 * interrupt handler will not be invoked. 
 	 */
 
-	*CMU_HFPERCLKEN0 |= CMU2_HFPERCLKEN0_TIMER1;
+	/*CMU_HFPERCLKEN0 |= CMU2_HFPERCLKEN0_TIMER1;
 	*TIMER1_TOP = period;
 	*TIMER1_IEN = 1;
-	*TIMER1_CMD = 1;
+	*TIMER1_CMD = 1;*/
 }
