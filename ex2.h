@@ -1,7 +1,6 @@
 #include <stdint.h>
 
-/*
- * objcopy creates _binary_x_raw_start and _binary_x_raw_end symbols for the
+/* objcopy creates _binary_x_raw_start and _binary_x_raw_end symbols for the
  * start and end of the embedded binary data. SOUND_DECLARE and SOUND use
  * preprocessor concatenation to import these symbols and create abstract
  * Sound structs from them.
@@ -17,9 +16,7 @@ typedef struct {
 } Sound;
 extern volatile Sound sounds[8];
 
-/*
- * Declaration of peripheral setup functions
- */
+/* Declaration of peripheral setup functions */
 void setup_timer(uint16_t period);
 void setup_dac(void);
 void setup_gpio(void);

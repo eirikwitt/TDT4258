@@ -142,4 +142,5 @@
 #define SYSTICK_LOAD ((volatile uint32_t*)0xe000e014)
 
 // added:
-#define GPIO_IF        ((volatile uint32_t*)(GPIO_PA_BASE + 0x114))
+#define GPIO_IF   ((volatile uint32_t*)(GPIO_PA_BASE + 0x114))
+#define TIMER1_IF ((volatile uint32_t*)(TIMER1_BASE + 0x10))
