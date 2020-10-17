@@ -33,12 +33,12 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 
 void handle_gpio()
 {
-	uint8_t btn = read_buttons();
+	uint8_t btn = GPIO_IF;
 	unsigned i;
 
-	*GPIO_IFC = ~btn;
+	*GPIO_IFC = btn;
 	for (i = 0; i < 8; ++i)
-		if (!(btn & 1<<i))
+		if (btn & 1<<i)
 			sounds[i].pos = sounds[i].start;
 
 }
