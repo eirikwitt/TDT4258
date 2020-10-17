@@ -4,14 +4,11 @@
 #include "efm32gg.h"
 #include "ex2.h"
 
-/*
- * function to set up GPIO mode and interrupts
- */
+/* function to set up GPIO mode and interrupts */
 void setup_gpio(void)
 {
-	/*
-	 * Example of HW access from C code: turn on joystick LEDs D4-D8 check 
-	 * efm32gg.h for other useful register definitions 
+	/* Example of HW access from C code: turn on joystick LEDs D4-D8 check
+	 * efm32gg.h for other useful register definitions
 	 */
 	*CMU_HFPERCLKEN0 |= CMU2_HFPERCLKEN0_GPIO; /* enable GPIO clock */
 	*GPIO_PA_CTRL = 2;						   /* set high drive strength */
