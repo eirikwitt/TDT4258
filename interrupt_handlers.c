@@ -31,7 +31,7 @@ void __attribute__((interrupt)) TIMER1_IRQHandler() {
 /* Common handler for all GPIO interrupts */
 void handle_gpio()
 {
-	uint32_t btn = GPIO_IF;
+	uint32_t btn = *GPIO_IF;
 	unsigned i;
 
 	*GPIO_IFC = btn; /* Clears active GPIO interrupt flags */
