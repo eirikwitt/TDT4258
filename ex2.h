@@ -14,7 +14,7 @@ extern int8_t _binary_##name##_raw_end[];
 typedef struct {
 	const int8_t *const start;
 	const int8_t *const end;
-	const volatile int8_t * pos; /* current position, or NULL if stopped */
+	const volatile int8_t *pos; /* current position, or NULL if stopped */
 } Sound;
 extern volatile Sound sounds[8];
 
