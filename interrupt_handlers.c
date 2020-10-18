@@ -6,7 +6,8 @@
 #include "ex2.h"
 
 /* TIMER1 interrupt handler */
-void __attribute__((interrupt)) TIMER1_IRQHandler() {
+void __attribute__((interrupt)) TIMER1_IRQHandler(void)
+{
 	int16_t sum = 0;
 	uint16_t usum;
 	unsigned i;
@@ -29,7 +30,7 @@ void __attribute__((interrupt)) TIMER1_IRQHandler() {
 }
 
 /* Common handler for all GPIO interrupts */
-void handle_gpio()
+void handle_gpio(void)
 {
 	uint32_t btn = *GPIO_IF;
 	unsigned i;
@@ -44,13 +45,13 @@ void handle_gpio()
 }
 
 /* GPIO even pin interrupt handler */
-void __attribute__((interrupt)) GPIO_EVEN_IRQHandler()
+void __attribute__((interrupt)) GPIO_EVEN_IRQHandler(void)
 {
 	handle_gpio();
 }
 
 /* GPIO odd pin interrupt handler */
-void __attribute__((interrupt)) GPIO_ODD_IRQHandler()
+void __attribute__((interrupt)) GPIO_ODD_IRQHandler(void)
 {
 	handle_gpio();
 }
