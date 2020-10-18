@@ -6,7 +6,7 @@
 #include "ex2.h"
 
 /* TIMER1 interrupt handler */
-void __attribute__ ((interrupt)) TIMER1_IRQHandler()
+void __attribute__ ((interrupt)) TIMER1_IRQHandler(void)
 {
 	int16_t sum = 0;
 	uint16_t usum;
@@ -28,13 +28,13 @@ void __attribute__ ((interrupt)) TIMER1_IRQHandler()
 }
 
 /* GPIO even pin interrupt handler */
-void __attribute__ ((interrupt)) GPIO_EVEN_IRQHandler()
+void __attribute__ ((interrupt)) GPIO_EVEN_IRQHandler(void)
 {
-	/*Not used in this solution */
+	/* Not used in this solution */
 }
 
 /* GPIO odd pin interrupt handler */
-void __attribute__ ((interrupt)) GPIO_ODD_IRQHandler()
+void __attribute__ ((interrupt)) GPIO_ODD_IRQHandler(void)
 {
-	/*Not used in this solution */
+	/* Not used in this solution */
 }
